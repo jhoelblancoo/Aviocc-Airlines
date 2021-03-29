@@ -1,0 +1,7 @@
+B31651029, Boeing 747, El Coloso, Carlos Cabrera
+B31651030, Boeing 737, El Pitufo, Juan Perez
+B31651031, Boeing 727, El Bromas, Checo Perez
+B31651032, Boeing 757, El Crack, Jose Perez
+B31651033, Boeing 767, El Chavo, Pedro Perez
+B31651034, Boeing 777, El Perro, Luis Perez
+B31651035, Boeing 787, El Bromas, Angel Perez

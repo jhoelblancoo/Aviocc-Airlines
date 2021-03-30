@@ -109,7 +109,7 @@ def llenar_lista(hash_table):
         piloto = piloto[1:]
         avion = Avion(serial, modelo, nombre, piloto)
         hash_table.insertar(avion)
-    cont = 0
+    #cont = 0
     """ #print(hash_table.tabla)
     for x in hash_table.tabla: #se almacenaran solo los 10 primeros usuarios en otra lista y se mostraran
         if (len(x) > 0):
@@ -145,7 +145,6 @@ def llenar_lista(hash_table):
 #def eliminar_avion():
 
 def main():
-    print("hola")
     lista = HashTable(3)
     """print(lista.tabla[0])
     lista.insertar(avion1)
@@ -154,7 +153,8 @@ def main():
     llenar_lista(lista)
     print(lista.tabla)
     avioncito = lista.buscar_serial("B31651041")
-    print(avioncito.modelo + " " + avioncito.nombre)
+    if (avioncito):
+        print(avioncito.modelo + " " + avioncito.nombre)
     """ intro()
     continuar_trabajo = True
     while continuar_trabajo:

@@ -35,11 +35,9 @@ class  HashTable:
             self.tabla[posicion][2] = array
          """
         for x in range(6):
-            print("{}  {}".format(len(self.tabla[posicion]),  x))
             if (len(self.tabla[posicion]) == x):
                 array = []
                 self.tabla[posicion].append(array)
-            print(self.tabla[posicion][x])
             if (len(self.tabla[posicion][x]) == 0):
                 self.tabla[posicion][x].append(avion)
                 return
@@ -67,23 +65,43 @@ class  HashTable:
     def buscar_serial(self, serial):
         posicion = 0
         posicion = self.direccion(serial)
-        valor = None
+        #valor = None
         for x in range(len(self.tabla[posicion])):
-            for y in range(2):
-                try:
-                    if (self.tabla[posicion][x][y].serial == serial):
-                        return self.tabla[posicion][x][y]
-                    
-                except:
-                    print("no se consiguio el avion")
-                    return  
-        return valor
+            try:
+                for y in range(2):
+                    try:
+                        if (self.tabla[posicion][x][y].serial == serial):
+                            return self.tabla[posicion][x][y]
+                        
+                    except:
+                        print("no se consiguio el avion")
+                        return 
+            except:
+                print("no se consiguio el avion")
+                return 
 
     def eliminar(self, serial):
+        posicion = 0
         posicion = self.direccion(serial)
+        #valor = None
+        for x in range(len(self.tabla[posicion])):
+            try:
+                for y in range(2):
+                    try:
+                        if (self.tabla[posicion][x][y].serial == serial):
+                            return self.tabla[posicion][x][y]
+                        
+                    except:
+                        print("no se consiguio el avion")
+                        return 
+            except:
+                print("no se consiguio el avion")
+                return 
+
+        """ posicion = self.direccion(serial)
         if (self.tabla[posicion] != None):
             self.tabla[posicion] = None
-            self.num_elementos -=1
+            self.num_elementos -=1 """
         
 
 

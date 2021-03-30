@@ -5,3 +5,11 @@ B31651032, Boeing 757, El Crack, Jose Perez
 B31651033, Boeing 767, El Chavo, Pedro Perez
 B31651034, Boeing 777, El Perro, Luis Perez
 B31651035, Boeing 787, El Bromas, Angel Perez
+B31651036, Boeing 787, El Bromas, Angel Perez
+B31651037, Boeing 787, El Bromas, Angel Perez
+B31651038, Boeing 787, El Bromas, Angel Perez
+B31651039, Boeing 787, El Bromas, Angel Perez
+B31651040, Boeing 787, El Bromas, Angel Perez
+B31651041, Boeing 787, El Corre Caminos, Eduardo Fernandez
+B31651042, Boeing 787, El Bromas, Angel Perez
+B31651043, Boeing 787, El Bromas, Angel Perez

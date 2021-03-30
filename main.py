@@ -101,12 +101,12 @@ def llenar_lista(hash_table):
     for x in datos:
         y = x[:-1].split(",")
         serial = y[0]
-        modelo = y[1].split(" ")
-        modelo = modelo[1] + " " + modelo[2]
-        nombre = y[2].split(" ")
-        nombre = nombre[1] + " " + nombre[2]
-        piloto = y[3].split(" ")
-        nombre = piloto[1] + " " + piloto[2]
+        modelo = y[1]
+        modelo = modelo[1:]
+        nombre = y[2]
+        nombre = nombre[1:]
+        piloto = y[3]
+        piloto = piloto[1:]
         avion = Avion(serial, modelo, nombre, piloto)
         hash_table.insertar(avion)
     cont = 0
@@ -153,6 +153,8 @@ def main():
     datos_usuario()"""
     llenar_lista(lista)
     print(lista.tabla)
+    avioncito = lista.buscar_serial("B31651041")
+    print(avioncito.modelo + " " + avioncito.nombre)
     """ intro()
     continuar_trabajo = True
     while continuar_trabajo:

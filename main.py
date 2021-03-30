@@ -110,15 +110,15 @@ def llenar_lista(hash_table):
         avion = Avion(serial, modelo, nombre, piloto)
         hash_table.insertar(avion)
     cont = 0
+    """ #print(hash_table.tabla)
     for x in hash_table.tabla: #se almacenaran solo los 10 primeros usuarios en otra lista y se mostraran
-        print("cont: " + str(cont))
         if (len(x) > 0):
             if (len(x) > 1):
                 for y in x:
-                    print(Fore.LIGHTMAGENTA_EX + y.serial + " " + y.modelo + " " + y.nombre + Fore.RESET)
-            else:
-                print(Fore.LIGHTMAGENTA_EX + x[0].serial + " " + x[0].modelo + " " + x[0].nombre + Fore.RESET)
-        cont += 1
+                    #print(Fore.LIGHTMAGENTA_EX + y.serial + " " + y.modelo + " " + y.nombre + Fore.RESET)
+            #else:
+                #print(Fore.LIGHTMAGENTA_EX + x[0].serial + " " + x[0].modelo + " " + x[0].nombre + Fore.RESET)
+        cont += 1 """
     print("\n")
 
 #def hash():
@@ -152,6 +152,7 @@ def main():
     print(len(lista.tabla[5]))
     datos_usuario()"""
     llenar_lista(lista)
+    print(lista.tabla)
     """ intro()
     continuar_trabajo = True
     while continuar_trabajo:

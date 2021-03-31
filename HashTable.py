@@ -80,6 +80,8 @@ class  HashTable:
                 print("no se consiguio el avion")
                 return 
 
+                      
+
     def eliminar(self, serial):
         posicion = 0
         posicion = self.direccion(serial)
@@ -104,6 +106,44 @@ class  HashTable:
             self.num_elementos -=1 """
         
 
+     def direccion_2(self, clave_secundaria):
+        i = 0
+        numero_indice = ord(clave_secundaria[0])
+        d_2 = int(clave_secundaria[1:])
+        d_2 += numero_indice
+        i = int(d_2 % self.tamano_tabla_2)
+        return i 
+
+
+    def buscar_modelo(self, modelo):
+        index = self.direccion(modelo)
+        #Vamos al primer nodo de la lista 
+        node = self.tabla_2[index]
+        #Recorremos la lista vinculada al nodo
+        while node is not None and node.key != key:
+            node = node.next
+        #El nodo es el par clave solicitado o ninguno
+        if node is None:
+            #No se encontró
+            return None
+        else:
+            #Encontrado - se retorna el valor 
+            return node.value
+
+    def buscar_nombre(self, nombre):
+        index = self.direccion(nombre)
+        #Vamos al primer nodo de la lista 
+        node = self.tabla_2[index]
+        #Recorremos la lista vinculada al nodo
+        while node is not None and node.key != key:
+            node = node.next
+        #El nodo es el par clave solicitado o ninguno
+        if node is None:
+            #No se encontró
+            return None
+        else:
+            #Encontrado - se retorna el valor 
+            return node.value
 
 
 

@@ -106,7 +106,7 @@ class  HashTable:
             self.num_elementos -=1 """
         
 
-     def direccion_2(self, clave_secundaria):
+    def direccion_2(self, clave_secundaria):
         i = 0
         numero_indice = ord(clave_secundaria[0])
         d_2 = int(clave_secundaria[1:])
@@ -116,7 +116,7 @@ class  HashTable:
 
 
     def buscar_modelo(self, modelo):
-        index = self.direccion(modelo)
+        index = self.direccion_2(modelo)
         #Vamos al primer nodo de la lista 
         node = self.tabla_2[index]
         #Recorremos la lista vinculada al nodo
@@ -131,7 +131,7 @@ class  HashTable:
             return node.value
 
     def buscar_nombre(self, nombre):
-        index = self.direccion(nombre)
+        index = self.direccion_2(nombre)
         #Vamos al primer nodo de la lista 
         node = self.tabla_2[index]
         #Recorremos la lista vinculada al nodo

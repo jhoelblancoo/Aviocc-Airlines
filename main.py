@@ -122,6 +122,15 @@ def llenar_lista(hash_table):
     print("\n")
 
 #def hash():
+#def hash(self, key):
+	#hashsum = 0
+	# For each character in the key
+	#for idx, c in enumerate(key):
+		# Add (index + length of key) ^ (current char code)
+		#hashsum += (idx + len(key)) ** ord(c)
+		# Perform modulus to keep hashsum in range [0, self.capacity - 1]
+		#hashsum = hashsum % self.capacity
+	#return hashsum
 
 
 #def nuevo_avion(avion):

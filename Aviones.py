@@ -18,7 +18,7 @@ class Avion:
         return "Modelo: {}\nNombre: {}\nPiloto: {}".format(self.modelo, self.nombre, self.piloto)
         
     def encontrado_nombre(self):
-        return "Serial: {}\Modelo: {}\nPiloto: {}".format(self.serial, self.modelo, self.piloto)
+        return "Serial: {}\nModelo: {}\nPiloto: {}".format(self.serial, self.modelo, self.piloto)
 
     def encontrado_modelo(self):
         return "Serial: {}\nNombre: {}\nPiloto: {}".format(self.serial, self.nombre, self.piloto)

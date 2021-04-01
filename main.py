@@ -45,12 +45,12 @@ def ingresar_avion(seriales, nombres, modelos):
     modelo = modelo.title() 
 
     nombre = input("Ingrese el nombre del avion: ") #el usuario ingresa su nombre
-    validacion_nombre = bool(modelo != None) and bool(nombre not in nombres) #se valida que el nombre este correcto
+    validacion_nombre = bool(nombre != None) and bool(nombre not in nombres) #se valida que el nombre este correcto
     while (validacion_nombre == False or len(nombre) > 12 or len(nombre) < 3):
         print("{}Este nombre no es valido{}".format(Fore.LIGHTRED_EX, Fore.RESET))
         nombre = input("Ingrese el nombre del avion nuevamente: ")
         print(nombre not in nombres)
-        validacion_nombre = bool(modelo != None) and bool(nombre not in nombres)
+        validacion_nombre = bool(nombre != None) and bool(nombre not in nombres)
     nombre = nombre.title() 
 
     """ piloto = input("Ingrese el nombre del piloto: ") #el usuario ingresa su nombre
@@ -163,7 +163,7 @@ def lista_pilotos(lista):
             lista_pilotos.append(x.piloto)
     return lista_pilotos
 
-def llenar_lista(hash_table):
+def llenar_lista(hash):
     with open("Basedatos.txt", "r") as bd:
         datos = bd.readlines()
     for x in datos:
@@ -176,7 +176,7 @@ def llenar_lista(hash_table):
         piloto = y[3]
         piloto = piloto[1:]
         avion = Avion(serial, modelo, nombre, piloto)
-        hash_table.insertar(avion)
+        hash.insertar(avion)
     #cont = 0
     """ #print(hash_table.tabla)
     for x in hash_table.tabla: #se almacenaran solo los 10 primeros usuarios en otra lista y se mostraran
@@ -195,7 +195,7 @@ def llenar_lista(hash_table):
 #def nuevo_avion(avion):
 
 
-def buscar_avion_serial(serial, hash_table):
+def buscar_avion_serial(hash):
     serial = input("Ingrese el serial del avion: ")#el usuario ingresa el serial del avion
     validacion_serial = bool(serial != None)  #el serial no se encontro en la base de datos
     while (validacion_serial == False or len(serial) != 9 or " " in serial): #Validacion para serial
@@ -203,17 +203,16 @@ def buscar_avion_serial(serial, hash_table):
         serial = input("Ingerese el serial nuevamente: ")
         validacion_serial = bool(serial != None) 
     serial = serial.title()
-    avioncito = hash_table.buscar_serial(serial)
+    avioncito = hash.buscar_serial(serial)
     if (avioncito):
         print("El avion de serial {} es el siguiente:".format(serial))
         print(avioncito.encontrado_serial)
-        return
     else:
         print("No existe ningun avion con el serial {}".format(serial))
-        return
+    return
 
 
-def buscar_avion_modelo(modelo, hash_table):
+def buscar_avion_modelo(hash):
     modelo = input("Ingrese el modelo del avion: ") #el usuario ingresa su nombre
     validacion_modelo = bool(modelo != None) #el username no se encontro en la base de datos
     while (validacion_modelo == False or len(modelo) > 20 or len(modelo) < 5):
@@ -221,44 +220,44 @@ def buscar_avion_modelo(modelo, hash_table):
         modelo = input("Ingrese el modelo del avion nuevamente: ")
         validacion_modelo = bool(modelo != None)
     modelo = modelo.title() 
-    hash_table.ordenar_indice_modelo()
-    avion = hash_table.binary_search(hash_table.indice_modelo, 0, len(hash_table.indice_modelo) -1, modelo)
+    hash.ordenar_indice_modelo()
+    int_modelo = hash.ascii_nombre(modelo)
+    avion = hash.binary_search(hash.indice_modelo, 0, len(hash.indice_modelo) -1, int_modelo)
     if (avion == -1):
         print("El avion por modelo {} no existe en la base de datos".format(modelo))
-        return
-    avioncito = hash_table.buscar_serial(avion[1])
+
+    avioncito = hash.buscar_serial(avion[1])
     if (avioncito):
-        print("El avion de serial {} es el siguiente:".format(serial))
-        print(avioncito.encontrado_serial)
-        return
+        print("El avion de modleo {} es el siguiente:".format(modelo))
+        print(avioncito.encontrado_modelo())
     else:
-        print("No existe ningun avion con el serial {}".format(serial))
-        return
+        print("No existe ningun avion con el modelo {}".format(modelo))
+    return
 
 
 
 
-def buscar_avion_nombre(nombre):
+def buscar_avion_nombre(hash):
     nombre = input("Ingrese el nombre del avion: ") #el usuario ingresa su nombre
-    validacion_nombre = bool(modelo != None) #se valida que el nombre este correcto
+    validacion_nombre = bool(nombre != None) #se valida que el nombre este correcto
     while (validacion_nombre == False or len(nombre) > 12 or len(nombre) < 3):
         print("{}Este nombre no es valido{}".format(Fore.LIGHTRED_EX, Fore.RESET))
         nombre = input("Ingrese el nombre del avion nuevamente: ")
-        print(nombre not in nombres)
-        validacion_nombre = bool(modelo != None)
+        validacion_nombre = bool(nombre != None)
     nombre = nombre.title() 
-    hash_table.ordenar_indice_nombre()
-    avion = hash_table.binary_search(hash_table.indice_nombre, 0, len(hash_table.indice_nombre) -1, nombre)
+    hash.ordenar_indice_nombre()
+    int_nombre = hash.ascii_nombre(nombre)
+    avion = hash.binary_search(hash.indice_nombre, 0, len(hash.indice_nombre) -1, int_nombre)
     if (avion == -1):
         print("El avion por modelo {} no existe en la base de datos".format(nombre))
-        return
-    avioncito = hash_table.buscar_serial(avion[1])
+
+    avioncito = hash.buscar_serial(avion[1])
     if (avioncito):
-        print("El avion de serial {} es el siguiente:".format(serial))
-        print(avioncito.encontrado_serial)
-        return
+        print("El avion de nombre {} es el siguiente:".format(nombre))
+        print(avioncito.encontrado_nombre())
     else:
-        print("No existe ningun avion con el serial {}".format(serial))
+        print("No existe ningun avion con el nombre {}".format(nombre))
+    return
 
 
 #def asignar_piloto():
@@ -321,7 +320,7 @@ def main():
             else: continuar_trabajo = False
         
         elif elegir == 2:
-                print("""
+            print("""
     Menu        
 1) Busqueda por serial
 2) Busqueda por nombre
@@ -337,13 +336,13 @@ def main():
                     print("{}La opcion ingresada no es valida{}".format(Fore.LIGHTRED_EX, Fore.RESET))
             
             if (opcion == 1):
-                buscar_serial()
+                buscar_avion_serial(lista)
             
             elif (opcion == 2):
-                buscar_avion_nombre()
+                buscar_avion_nombre(lista)
 
             elif (opcion == 3):
-                buscar_avion_modelo()
+                buscar_avion_modelo(lista)
 
 
             print("\n{}1) Volver al menu \n{}2) Salir {}".format(Fore.LIGHTBLUE_EX, Fore.LIGHTRED_EX, Fore.RESET))

@@ -7,13 +7,15 @@ class  HashTable:
     num_elementos = 0
     factor_carga = 0
     tabla = []
+    indice_nombre = []
+    indice_modelo = []
 
     def __init__(self, tamano_tabla):
         self.tamano_tabla = tamano_tabla
         self.tabla = [[[]]for element in range(tamano_tabla)]
         self.num_elementos = 0
         self.factor_carga = 0
-        print(self.tabla)
+        """ print(self.tabla) """
     
     def direccion(self, clave):
         p = 0
@@ -35,6 +37,7 @@ class  HashTable:
             self.tabla[posicion][2] = array
          """
         for x in range(6):
+            self.llenar_indice_nombre(avion)
             if (len(self.tabla[posicion]) == x):
                 array = []
                 self.tabla[posicion].append(array)
@@ -60,6 +63,23 @@ class  HashTable:
             
         #self.tabla[posicion].append(avion)
         self.num_elementos +=1
+
+    def ascii_nombre(self, avion):
+        valor = 0
+        nombre = avion.nombre
+        for x in nombre:
+            valor += ord(x)
+        return valor
+
+    def llenar_indice_nombre(self, avion):
+        self.indice_nombre.append(avion)
+
+    """ def myFunc(self):
+        return self.indice_nombre['nombre'] """
+
+    def ordenar_indice_nombre(self):
+        self.indice_nombre.sort(key=lambda x: x.nombre, reverse=False)
+        """ self.indice_nombre.sort(key= nombre) """
         
 
     def buscar_serial(self, serial):
@@ -79,6 +99,9 @@ class  HashTable:
             except:
                 print("no se consiguio el avion")
                 return 
+    def print_indice_nombre(self):
+        for x in self.indice_nombre:
+            print(x.nombre)
 
     def eliminar(self, serial):
         posicion = 0

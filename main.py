@@ -155,6 +155,8 @@ def main():
     avioncito = lista.buscar_serial("B31651041")
     if (avioncito):
         print(avioncito.modelo + " " + avioncito.nombre)
+    lista.ordenar_indice_nombre()
+    lista.print_indice_nombre()
     """ intro()
     continuar_trabajo = True
     while continuar_trabajo:

@@ -13,4 +13,11 @@ class Avion:
     
     def para_txt(self):
         return "{}, {}, {}, {}".format(self.serial, self.modelo, self.nombre, self.piloto)
+
+    def ascii_nombre(self):
+        valor = 0
+        nombre = self.nombre
+        for x in nombre:
+            valor += ord(x)
+        return valor
     

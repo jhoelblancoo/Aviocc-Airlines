@@ -209,7 +209,7 @@ def buscar_avion_serial(hash):
         print(avioncito.encontrado_serial)
     else:
         print("No existe ningun avion con el serial {}".format(serial))
-    return
+    return avioncito
 
 
 def buscar_avion_modelo(hash):
@@ -232,7 +232,7 @@ def buscar_avion_modelo(hash):
         print(avioncito.encontrado_modelo())
     else:
         print("No existe ningun avion con el modelo {}".format(modelo))
-    return
+    return avioncito
 
 
 
@@ -257,7 +257,7 @@ def buscar_avion_nombre(hash):
         print(avioncito.encontrado_nombre())
     else:
         print("No existe ningun avion con el nombre {}".format(nombre))
-    return
+    return avioncito
 
 
 #def asignar_piloto():

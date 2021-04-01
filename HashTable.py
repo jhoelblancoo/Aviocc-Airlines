@@ -145,23 +145,26 @@ class  HashTable:
             self.tabla[posicion] = None
             self.num_elementos -=1 """
 
-    def binary_search(self, arr, low, high, x):#pasar el indice, un 0, el len(tabla) -1 y el valor a buscar
+    def binary_search(self, arr, low, high, x, string):#pasar el indice, un 0, el len(tabla) -1 y el valor a buscar
         if high >= low:
 
             mid = (high + low) // 2
     
             # If element is present at the middle itself
             if self.ascii_nombre(arr[mid][0]) == x:
-                return arr[mid]
+                if (arr[mid][0] == string):
+                    return arr[mid]
+                else:
+                    return self.binary_search(arr, low, mid - 1, x, string)
     
             # If element is smaller than mid, then it can only
             # be present in left subarray
             elif self.ascii_nombre(arr[mid][0]) > x:
-                return self.binary_search(arr, low, mid - 1, x)
+                return self.binary_search(arr, low, mid - 1, x, string)
     
             # Else the element can only be present in right subarray
             else:
-                return self.binary_search(arr, mid + 1, high, x)
+                return self.binary_search(arr, mid + 1, high, x, string)
     
         else:
             # Element is not present in the array

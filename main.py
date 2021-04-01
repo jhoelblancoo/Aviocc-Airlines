@@ -222,7 +222,7 @@ def buscar_avion_modelo(hash):
     modelo = modelo.title() 
     hash.ordenar_indice_modelo()
     int_modelo = hash.ascii_nombre(modelo)
-    avion = hash.binary_search(hash.indice_modelo, 0, len(hash.indice_modelo) -1, int_modelo)
+    avion = hash.binary_search(hash.indice_modelo, 0, len(hash.indice_modelo) -1, int_modelo, modelo)
     if (avion == -1):
         print("El avion por modelo {} no existe en la base de datos".format(modelo))
 
@@ -247,7 +247,7 @@ def buscar_avion_nombre(hash):
     nombre = nombre.title() 
     hash.ordenar_indice_nombre()
     int_nombre = hash.ascii_nombre(nombre)
-    avion = hash.binary_search(hash.indice_nombre, 0, len(hash.indice_nombre) -1, int_nombre)
+    avion = hash.binary_search(hash.indice_nombre, 0, len(hash.indice_nombre) -1, int_nombre, nombre)
     if (avion == -1):
         print("El avion por modelo {} no existe en la base de datos".format(nombre))
 

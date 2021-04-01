@@ -156,12 +156,17 @@ def lista_modelos(lista):
         lista_modelos.append(x[0])
     return lista_modelos
 
-def lista_pilotos(lista):
-    lista_pilotos = []
-    for x in lista:
-        if (x.piloto != " " or x.piloto != None or x.piloto != ""):
-            lista_pilotos.append(x.piloto)
-    return lista_pilotos
+def lista_pilotos():
+    lista = []
+    with open("Basedatos.txt", "r") as bd:
+        datos = bd.readlines()
+    for x in datos:
+        y = x[:-1].split(",")
+        piloto = y[3]
+        piloto = piloto[1:]
+        if (piloto != "" and piloto != " " and piloto != None):
+            lista.append(piloto)
+    return lista
 
 def llenar_lista(hash):
     with open("Basedatos.txt", "r") as bd:
@@ -194,8 +199,21 @@ def llenar_lista(hash):
 
 #def nuevo_avion(avion):
 
+def editar_txt(serial, avion, piloto):
+    with open("BaseDatos.txt", "r") as f:
+        lines = f.readlines()
+    with open("BaseDatos.txt", "w") as f:
+        for line in lines:
+            y = line[:-1].split(",")
+            if y[0] != serial:
+                f.write(line)
+                
+    nuevo_avion = Avion(serial, avion.modelo, avion.nombre, piloto)
+    with open("Basedatos.txt", "a+") as bd: 
+        bd.write(nuevo_avion.para_txt() + "\n")
 
-def buscar_avion_serial(hash):
+
+def buscar_avion_serial(hash, boolean):
     serial = input("Ingrese el serial del avion: ")#el usuario ingresa el serial del avion
     validacion_serial = bool(serial != None)  #el serial no se encontro en la base de datos
     while (validacion_serial == False or len(serial) != 9 or " " in serial): #Validacion para serial
@@ -204,15 +222,15 @@ def buscar_avion_serial(hash):
         validacion_serial = bool(serial != None) 
     serial = serial.title()
     avioncito = hash.buscar_serial(serial)
-    if (avioncito):
+    if (avioncito and not boolean):
         print("El avion de serial {} es el siguiente:".format(serial))
         print(avioncito.encontrado_serial)
-    else:
+    elif (avioncito == None):
         print("No existe ningun avion con el serial {}".format(serial))
     return avioncito
 
 
-def buscar_avion_modelo(hash):
+def buscar_avion_modelo(hash, boolean):
     modelo = input("Ingrese el modelo del avion: ") #el usuario ingresa su nombre
     validacion_modelo = bool(modelo != None) #el username no se encontro en la base de datos
     while (validacion_modelo == False or len(modelo) > 20 or len(modelo) < 5):
@@ -227,17 +245,17 @@ def buscar_avion_modelo(hash):
         print("El avion por modelo {} no existe en la base de datos".format(modelo))
 
     avioncito = hash.buscar_serial(avion[1])
-    if (avioncito):
+    if (avioncito and not boolean):
         print("El avion de modleo {} es el siguiente:".format(modelo))
         print(avioncito.encontrado_modelo())
-    else:
+    elif (avioncito == None):
         print("No existe ningun avion con el modelo {}".format(modelo))
     return avioncito
 
 
 
 
-def buscar_avion_nombre(hash):
+def buscar_avion_nombre(hash, boolean):
     nombre = input("Ingrese el nombre del avion: ") #el usuario ingresa su nombre
     validacion_nombre = bool(nombre != None) #se valida que el nombre este correcto
     while (validacion_nombre == False or len(nombre) > 12 or len(nombre) < 3):
@@ -252,10 +270,10 @@ def buscar_avion_nombre(hash):
         print("El avion por modelo {} no existe en la base de datos".format(nombre))
 
     avioncito = hash.buscar_serial(avion[1])
-    if (avioncito):
+    if (avioncito and not boolean):
         print("El avion de nombre {} es el siguiente:".format(nombre))
         print(avioncito.encontrado_nombre())
-    else:
+    elif (avioncito == None):
         print("No existe ningun avion con el nombre {}".format(nombre))
     return avioncito
 
@@ -336,13 +354,13 @@ def main():
                     print("{}La opcion ingresada no es valida{}".format(Fore.LIGHTRED_EX, Fore.RESET))
             
             if (opcion == 1):
-                buscar_avion_serial(lista)
+                buscar_avion_serial(lista, False)
             
             elif (opcion == 2):
-                buscar_avion_nombre(lista)
+                buscar_avion_nombre(lista, False)
 
             elif (opcion == 3):
-                buscar_avion_modelo(lista)
+                buscar_avion_modelo(lista, False)
 
 
             print("\n{}1) Volver al menu \n{}2) Salir {}".format(Fore.LIGHTBLUE_EX, Fore.LIGHTRED_EX, Fore.RESET))
@@ -359,7 +377,48 @@ def main():
             else: continuar_trabajo = False
         
         elif elegir == 3:
-            print("\nAsignar piloto")
+            print("""
+    Menu        
+1) Busqueda por serial
+2) Busqueda por nombre
+3) Busqueda por modelo
+""")
+            while True:
+                try:
+                    opcion = int(input("{}Ingrese su opcion:{} ".format(Fore.LIGHTYELLOW_EX, Fore.RESET)))
+                    if opcion < 1 or opcion > 3:
+                        raise  ValueError
+                    break
+                except ValueError:
+                    print("{}La opcion ingresada no es valida{}".format(Fore.LIGHTRED_EX, Fore.RESET))
+            avion = ""
+            if (opcion == 1):
+                avion = buscar_avion_serial(lista, True)
+            
+            elif (opcion == 2):
+                avion = buscar_avion_nombre(lista, True)
+
+            elif (opcion == 3):
+                avion = buscar_avion_modelo(lista, True)
+            
+            if (avion == None):
+                print("No se consiguio el avion")
+            else:
+                pilotos = lista_pilotos()
+                print(pilotos)
+                piloto = input("Ingrese el nombre del piloto: ") #el usuario ingresa su nombre
+                validacion_nombre = bool(piloto != None) and bool(piloto not in pilotos) #se valida que el nombre este correcto
+                while (validacion_nombre == False or len(piloto) > 12 or len(piloto) < 3):
+                    print("{}Este piloto ya esta registrado{}".format(Fore.LIGHTRED_EX, Fore.RESET))
+                    piloto = input("Ingrese el nombre del piloto nuevamente: ")
+                    print(piloto not in pilotos)
+                    validacion_nombre = bool(piloto != None) and bool(piloto not in pilotos)
+                piloto = piloto.title() 
+                boolean = lista.listar_piloto(avion.serial, piloto)
+                if (boolean):
+                    editar_txt(avion.serial, avion, piloto)
+
+
             print("\n{}1) Volver al menu \n{}2) Salir {}".format(Fore.LIGHTBLUE_EX, Fore.LIGHTRED_EX, Fore.RESET))
             while True: 
                 try:

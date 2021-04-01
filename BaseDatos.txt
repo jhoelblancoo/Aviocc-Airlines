@@ -15,9 +15,8 @@ B31651042, Boeing 787, El Bromas, Angel Perez
 B31651043, Boeing 787, El Bromas, Angel Perez
 B31651043, Boeing 787, El Peo, Carlos Feo
 B31651049, Boeing 797, El Chavo, 
-B31651067, Airbus A380, El Peo, 
 B31651089, Airbus1340, El Crack, 
-B31651090, Airbus A330, El Crack, 
-B31651088, Airbus A320, El Crack, 
 B31651008, Airbus A319, El Crack, 
 B31651048, Airbus A321, El Bromas, 
+B31651090, Airbus A330, El Crack, Juan Lopez
+B31651088, Airbus A320, El Crack, Pedro Leon

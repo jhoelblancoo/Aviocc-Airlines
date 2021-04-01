@@ -105,11 +105,11 @@ class  HashTable:
                             return self.tabla[posicion][x][y]
                         
                     except:
-                        print("no se consiguio el avion")
-                        return 
+                        print("No se consiguio el avion")
+                        return None
             except:
-                print("no se consiguio el avion")
-                return 
+                print("No se consiguio el avion")
+                return None
                 
     def print_indice_nombre(self):
         for x in self.indice_nombre:
@@ -134,10 +134,10 @@ class  HashTable:
                             return self.tabla[posicion][x][y]
                         
                     except:
-                        print("no se consiguio el avion")
+                        print("No se consiguio el avion")
                         return 
             except:
-                print("no se consiguio el avion")
+                print("No se consiguio el avion")
                 return 
 
         """ posicion = self.direccion(serial)
@@ -169,6 +169,30 @@ class  HashTable:
         else:
             # Element is not present in the array
             return -1
+    
+    def listar_piloto(self, serial, piloto):
+        posicion = 0
+        posicion = self.direccion(serial)
+        #valor = None
+        for x in range(len(self.tabla[posicion])):
+            try:
+                for y in range(2):
+                    try:
+                        if (self.tabla[posicion][x][y].serial == serial):
+                            if(self.tabla[posicion][x][y].piloto == "" or self.tabla[posicion][x][y].piloto == " " or self.tabla[posicion][x][y].piloto == None):
+                                self.tabla[posicion][x][y].piloto = piloto
+                                print("Se asigno a {} como piloto del avion {}".format(piloto, self.tabla[posicion][x][y].modelo))
+                                return True
+                            else:
+                                print("Ya el piloto {} tiene asignado el avion {}".format(self.tabla[posicion][x][y].piloto, self.tabla[posicion][x][y].modelo))
+                                return False
+                        
+                    except:
+                        print("No se consiguio el avion")
+                        return False
+            except:
+                print("No se consiguio el avion")
+                return False
         
 
 

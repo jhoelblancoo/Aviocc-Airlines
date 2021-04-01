@@ -29,7 +29,6 @@ def ingresar_avion(seriales, nombres, modelos):
     Aqui el usuario va a ingresar los datos del avion
     """
     serial = input("Ingrese el serial del avion: ")#el usuario ingresa el serial del avion
-    print(bool(serial not in seriales))
     validacion_serial = bool(serial != None) and bool(serial not in seriales) #el username no se encontro en la base de datos
     while (validacion_serial == False or len(serial) != 9 or " " in serial): #Validacion para username
         print("{}Su usuario solo puede contener minusculas y numeros sin ningun espacio{}\n".format(Fore.LIGHTRED_EX, Fore.RESET))
@@ -40,20 +39,18 @@ def ingresar_avion(seriales, nombres, modelos):
     modelo = input("Ingrese el modelo del avion: ") #el usuario ingresa su nombre
     validacion_modelo = bool(modelo != None) and bool(modelo not in modelos) #el username no se encontro en la base de datos
     while (validacion_modelo == False or len(modelo) > 20 or len(modelo) < 5):
-        print("{}Este modleo no es valido{}".format(Fore.LIGHTRED_EX, Fore.RESET))
-        modelo = input("Ingrese el modelo del avion: ")
+        print("{}Este modelo no es valido{}".format(Fore.LIGHTRED_EX, Fore.RESET))
+        modelo = input("Ingrese el modelo del avion nuevamente: ")
         validacion_modelo = modelo != None and modelo not in modelos
     modelo = modelo.title() 
 
-    print(nombres)
     nombre = input("Ingrese el nombre del avion: ") #el usuario ingresa su nombre
-    validacion_nombre = bool(nombre not in nombres) #se valida que el nombre este correcto
-    print(validacion_nombre)
+    validacion_nombre = bool(modelo != None) and bool(nombre not in nombres) #se valida que el nombre este correcto
     while (validacion_nombre == False or len(nombre) > 12 or len(nombre) < 3):
         print("{}Este nombre no es valido{}".format(Fore.LIGHTRED_EX, Fore.RESET))
-        nombre = input("Ingrese el nombre del avion: ")
+        nombre = input("Ingrese el nombre del avion nuevamente: ")
         print(nombre not in nombres)
-        validacion_nombre = bool(nombre not in nombres)
+        validacion_nombre = bool(modelo != None) and bool(nombre not in nombres)
     nombre = nombre.title() 
 
     """ piloto = input("Ingrese el nombre del piloto: ") #el usuario ingresa su nombre
@@ -198,13 +195,42 @@ def llenar_lista(hash_table):
 #def nuevo_avion(avion):
 
 
-#def buscar_avion_serial(serial):
+def buscar_avion_serial(serial, hash_table):
+    serial = input("Ingrese el serial del avion: ")#el usuario ingresa el serial del avion
+    validacion_serial = bool(serial != None)  #el serial no se encontro en la base de datos
+    while (validacion_serial == False or len(serial) != 9 or " " in serial): #Validacion para serial
+        print("{}El serial solo puede tener letras, numeros sin ningun espacio y 9 caracteres{}\n".format(Fore.LIGHTRED_EX, Fore.RESET))
+        serial = input("Ingerese el serial nuevamente: ")
+        validacion_serial = bool(serial != None) 
+    serial = serial.title()
+    avioncito = hash_table.buscar_serial(serial)
+    if (avioncito):
+        print("El avion de serial {} es el siguiente:".format(serial))
+        print(avioncito.encontrado_serial)
+    else:
+        print("No existe ningun avion con el serial {}".format(serial))
 
 
-#def buscar_avion_modelo(modelo):
+def buscar_avion_modelo(modelo):
+    modelo = input("Ingrese el modelo del avion: ") #el usuario ingresa su nombre
+    validacion_modelo = bool(modelo != None) #el username no se encontro en la base de datos
+    while (validacion_modelo == False or len(modelo) > 20 or len(modelo) < 5):
+        print("{}Este modelo no es valido{}".format(Fore.LIGHTRED_EX, Fore.RESET))
+        modelo = input("Ingrese el modelo del avion nuevamente: ")
+        validacion_modelo = bool(modelo != None)
+    modelo = modelo.title() 
 
 
-#def buscar_avion_nombre(nombre):
+
+def buscar_avion_nombre(nombre):
+    nombre = input("Ingrese el nombre del avion: ") #el usuario ingresa su nombre
+    validacion_nombre = bool(modelo != None) #se valida que el nombre este correcto
+    while (validacion_nombre == False or len(nombre) > 12 or len(nombre) < 3):
+        print("{}Este nombre no es valido{}".format(Fore.LIGHTRED_EX, Fore.RESET))
+        nombre = input("Ingrese el nombre del avion nuevamente: ")
+        print(nombre not in nombres)
+        validacion_nombre = bool(modelo != None)
+    nombre = nombre.title() 
 
 
 #def asignar_piloto():
@@ -267,7 +293,33 @@ def main():
             else: continuar_trabajo = False
         
         elif elegir == 2:
-            print("\nBuscar avion")
+                print("""
+    Menu        
+1) Busqueda por serial
+2) Busqueda por nombre
+3) Busqueda por modelo
+""")
+            while True:
+                try:
+                    opcion = int(input("{}Ingrese su opcion:{} ".format(Fore.LIGHTYELLOW_EX, Fore.RESET)))
+                    if opcion < 1 or opcion > 3:
+                        raise  ValueError
+                    break
+                except ValueError:
+                    print("{}La opcion ingresada no es valida{}".format(Fore.LIGHTRED_EX, Fore.RESET))
+            
+            if (opcion == 1):
+                print(hola)
+            
+            elif (opcion == 2):
+                print(hola)
+
+            elif (opcion == 3):
+                print(pepe)
+            
+
+
+
             print("\n{}1) Volver al menu \n{}2) Salir {}".format(Fore.LIGHTBLUE_EX, Fore.LIGHTRED_EX, Fore.RESET))
             while True: 
                 try:

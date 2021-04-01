@@ -37,15 +37,18 @@ class  HashTable:
             self.tabla[posicion][2] = array
          """
         for x in range(6):
-            self.llenar_indice_nombre(avion)
             if (len(self.tabla[posicion]) == x):
                 array = []
                 self.tabla[posicion].append(array)
             if (len(self.tabla[posicion][x]) == 0):
                 self.tabla[posicion][x].append(avion)
+                self.llenar_indice_nombre(avion)
+                self.llenar_indice_modelo(avion)
                 return
             elif (len(self.tabla[posicion][x]) == 1):
                 self.tabla[posicion][x].append(avion)
+                self.llenar_indice_nombre(avion)
+                self.llenar_indice_modelo(avion)
                 return
             """elif (len(self.tabla[posicion][0][x]) == 2):
                 array = [arra]
@@ -64,21 +67,29 @@ class  HashTable:
         #self.tabla[posicion].append(avion)
         self.num_elementos +=1
 
-    def ascii_nombre(self, avion):
+    def ascii_nombre(self, nombre):
         valor = 0
-        nombre = avion.nombre
         for x in nombre:
             valor += ord(x)
         return valor
 
     def llenar_indice_nombre(self, avion):
-        self.indice_nombre.append(avion)
+        tupla = (avion.nombre, avion.serial)
+        self.indice_nombre.append(tupla)
+
+    def llenar_indice_modelo(self, avion):
+        tupla2 = (avion.modelo, avion.serial)
+        self.indice_modelo.append(tupla2)
 
     """ def myFunc(self):
         return self.indice_nombre['nombre'] """
 
     def ordenar_indice_nombre(self):
-        self.indice_nombre.sort(key=lambda x: x.nombre, reverse=False)
+        self.indice_nombre.sort(key=lambda x: self.ascii_nombre(x[0]), reverse=False)
+        """ self.indice_nombre.sort(key= nombre) """
+        
+    def ordenar_indice_modelo(self):
+        self.indice_modelo.sort(key=lambda y: self.ascii_nombre(y[0]), reverse=False)
         """ self.indice_nombre.sort(key= nombre) """
         
 
@@ -99,9 +110,17 @@ class  HashTable:
             except:
                 print("no se consiguio el avion")
                 return 
+                
     def print_indice_nombre(self):
         for x in self.indice_nombre:
-            print(x.nombre)
+            print(x[0] + " " + x[1])
+            print(self.ascii_nombre(x[0]))
+
+    def print_indice_modelo(self):
+        for x in self.indice_modelo:
+            print(x[0] + " " + x[1])
+            print(self.ascii_nombre(x[0]))
+
 
     def eliminar(self, serial):
         posicion = 0

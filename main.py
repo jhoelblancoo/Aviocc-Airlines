@@ -151,12 +151,15 @@ def main():
     print(len(lista.tabla[5]))
     datos_usuario()"""
     llenar_lista(lista)
-    print(lista.tabla)
+    """ print(lista.tabla) 
     avioncito = lista.buscar_serial("B31651041")
     if (avioncito):
-        print(avioncito.modelo + " " + avioncito.nombre)
+        print(avioncito.modelo + " " + avioncito.nombre)"""
     lista.ordenar_indice_nombre()
     lista.print_indice_nombre()
+    print("\n\n")
+    lista.ordenar_indice_modelo()
+    lista.print_indice_modelo()
     """ intro()
     continuar_trabajo = True
     while continuar_trabajo:

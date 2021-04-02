@@ -401,11 +401,10 @@ def main():
             elif (opcion == 3):
                 avion = buscar_avion_modelo(lista, True)
             
-            if (avion == None):
+            if (avion == None or avion == "" or avion == " "):
                 print("No se consiguio el avion")
             else:
                 pilotos = lista_pilotos()
-                print(pilotos)
                 piloto = input("Ingrese el nombre del piloto: ") #el usuario ingresa su nombre
                 validacion_nombre = bool(piloto != None) and bool(piloto not in pilotos) #se valida que el nombre este correcto
                 while (validacion_nombre == False or len(piloto) > 12 or len(piloto) < 3):
@@ -433,7 +432,39 @@ def main():
             else: continuar_trabajo = False
         
         elif elegir == 4:
-            print("\nLiberar avion")
+            print("""
+    Menu        
+1) Busqueda por serial
+2) Busqueda por nombre
+3) Busqueda por modelo
+""")
+            while True:
+                try:
+                    opcion = int(input("{}Ingrese su opcion:{} ".format(Fore.LIGHTYELLOW_EX, Fore.RESET)))
+                    if opcion < 1 or opcion > 3:
+                        raise  ValueError
+                    break
+                except ValueError:
+                    print("{}La opcion ingresada no es valida{}".format(Fore.LIGHTRED_EX, Fore.RESET))
+            avion = ""
+            if (opcion == 1):
+                avion = buscar_avion_serial(lista, True)
+            
+            elif (opcion == 2):
+                avion = buscar_avion_nombre(lista, True)
+
+            elif (opcion == 3):
+                avion = buscar_avion_modelo(lista, True)
+            
+            if (avion == None or avion == "" or avion == " "):
+                print("No se consiguio el avion")
+            else:
+                boolean = lista.quitar_piloto(avion.serial)
+                if (boolean):
+                    piloto = ""
+                    editar_txt(avion.serial, avion, piloto)
+
+
             print("\n{}1) Volver al menu \n{}2) Salir {}".format(Fore.LIGHTBLUE_EX, Fore.LIGHTRED_EX, Fore.RESET))
             while True: 
                 try:

@@ -193,6 +193,31 @@ class  HashTable:
             except:
                 print("No se consiguio el avion")
                 return False
+
+    def quitar_piloto(self, serial):
+        posicion = 0
+        posicion = self.direccion(serial)
+        #valor = None
+        for x in range(len(self.tabla[posicion])):
+            try:
+                for y in range(2):
+                    try:
+                        if (self.tabla[posicion][x][y].serial == serial):
+                            if(self.tabla[posicion][x][y].piloto != "" and self.tabla[posicion][x][y].piloto != " " and self.tabla[posicion][x][y].piloto != None):
+                                pilot = self.tabla[posicion][x][y].piloto
+                                self.tabla[posicion][x][y].piloto = ""
+                                print("Se elimino a {} como piloto del avion {}".format(pilot, self.tabla[posicion][x][y].modelo))
+                                return True
+                            else:
+                                print("El avion {} no tiene ningun piloto asignado".format(self.tabla[posicion][x][y].modelo))
+                                return False
+                        
+                    except:
+                        print("No se consiguio el avion")
+                        return False
+            except:
+                print("No se consiguio el avion")
+                return False
         
 
 

@@ -1,4 +1,3 @@
-B31651029, Boeing 747, El Coloso, Carlos Cabrera
 B31651030, Boeing 737, El Pitufo, Juan Perez
 B31651031, Boeing 727, El Bromas, Checo Perez
 B31651032, Boeing 757, El Crack, Jose Perez
@@ -20,3 +19,4 @@ B31651008, Airbus A319, El Crack,
 B31651048, Airbus A321, El Bromas, 
 B31651090, Airbus A330, El Crack, Juan Lopez
 B31651088, Airbus A320, El Crack, Pedro Leon
+B31651029, Boeing 747, El Coloso, 

@@ -222,12 +222,16 @@ def buscar_avion_serial(hash, boolean):
         validacion_serial = bool(serial != None) 
     serial = serial.title()
     avioncito = hash.buscar_serial(serial)
-    if (avioncito and not boolean):
-        print("El avion de serial {} es el siguiente:".format(serial))
-        print(avioncito.encontrado_serial())
-    elif (avioncito == None):
+    try:
+        if (avioncito and not boolean):
+            print("El avion de serial {} es el siguiente:".format(serial))
+            print(avioncito.encontrado_serial())
+        elif (avioncito == None):
+            print("No existe ningun avion con el serial {}".format(serial))
+        return avioncito
+    except:
         print("No existe ningun avion con el serial {}".format(serial))
-    return avioncito
+        return None
 
 
 def buscar_avion_modelo(hash, boolean):
@@ -241,16 +245,20 @@ def buscar_avion_modelo(hash, boolean):
     hash.ordenar_indice_modelo()
     int_modelo = hash.ascii_nombre(modelo)
     avion = hash.binary_search(hash.indice_modelo, 0, len(hash.indice_modelo) -1, int_modelo, modelo)
-    if (avion == -1):
-        print("El avion por modelo {} no existe en la base de datos".format(modelo))
+    try:
+        if (avion == -1):
+            print("El avion por modelo {} no existe en la base de datos".format(modelo))
 
-    avioncito = hash.buscar_serial(avion[1])
-    if (avioncito and not boolean):
-        print("El avion de modelo {} es el siguiente:".format(modelo))
-        print(avioncito.encontrado_modelo())
-    elif (avioncito == None):
+        avioncito = hash.buscar_serial(avion[1])
+        if (avioncito and not boolean):
+            print("El avion de modelo {} es el siguiente:".format(modelo))
+            print(avioncito.encontrado_modelo())
+        elif (avioncito == None):
+            print("No existe ningun avion con el modelo {}".format(modelo))
+        return avioncito
+    except:
         print("No existe ningun avion con el modelo {}".format(modelo))
-    return avioncito
+        return None
 
 
 
@@ -266,16 +274,20 @@ def buscar_avion_nombre(hash, boolean):
     hash.ordenar_indice_nombre()
     int_nombre = hash.ascii_nombre(nombre)
     avion = hash.binary_search(hash.indice_nombre, 0, len(hash.indice_nombre) -1, int_nombre, nombre)
-    if (avion == -1):
-        print("El avion por modelo {} no existe en la base de datos".format(nombre))
+    try: 
+        if (avion == -1):
+            print("El avion por modelo {} no existe en la base de datos".format(nombre))
 
-    avioncito = hash.buscar_serial(avion[1])
-    if (avioncito and not boolean):
-        print("El avion de nombre {} es el siguiente:".format(nombre))
-        print(avioncito.encontrado_nombre())
-    elif (avioncito == None):
+        avioncito = hash.buscar_serial(avion[1])
+        if (avioncito and not boolean):
+            print("El avion de nombre {} es el siguiente:".format(nombre))
+            print(avioncito.encontrado_nombre())
+        elif (avioncito == None):
+            print("No existe ningun avion con el nombre {}".format(nombre))
+        return avioncito
+    except:
         print("No existe ningun avion con el nombre {}".format(nombre))
-    return avioncito
+        return None
 
 
 #def asignar_piloto():

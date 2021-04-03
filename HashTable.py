@@ -111,13 +111,26 @@ class  HashTable:
             except:
                 print("No se consiguio el avion")
                 return None
+
+    def print_tabla(self, tabla):
+        for x in range(len(tabla)):
+            try:
+                if (len(tabla[x]) > 1):
+                    print("[ {} , {} ]".format(tabla[x][0].get_serial(), tabla[x][1].get_serial()))
+                else:
+                    print("[ {} ]".format(tabla[x][0].get_serial()))
+                    
+            except:
+                print("No se consiguio el avion")
+                return None
                 
     def eliminar_serial(self, serial):
         posicion = 0
         posicion = self.direccion(serial)
         buscar = True
-        print(self.tabla[posicion])
+        print(self.print_tabla(self.tabla[posicion]))
         #valor = None
+        largo = len(self.tabla[posicion])
         for x in range(len(self.tabla[posicion])):
             if (buscar):
                 try:
@@ -125,20 +138,18 @@ class  HashTable:
                         try:
                             if (y == 0):
                                 if (self.tabla[posicion][x][y].serial == serial):
-                                    print("Se elimino al primer avion con exito ")
-                                    print(self.tabla[posicion][x][y])
+                                    print("Se elimino al avion de serial {}:".format(serial))
+                                    print(self.tabla[posicion][x][y].encontrado_serial())
                                     self.tabla[posicion][x].pop(0)
                                     if (len(self.tabla[posicion][x]) == 0): 
                                         self.tabla[posicion].pop(x)
-                                        print("la lista quedo vacia")
-                                        print(self.tabla[posicion])
+                                        print(self.print_tabla(self.tabla[posicion]))
                                     buscar = False
-                                    print("arriba {}".format(x))
                                     break
                             else:
                                 if (buscar and self.tabla[posicion][x][y].serial == serial):
-                                    print("Se elimino al segundo avion con exito ")
-                                    print(self.tabla[posicion][x][y])
+                                    print("Se elimino al avion de serial {}:".format(serial))
+                                    print(self.tabla[posicion][x][y].encontrado_serial())
                                     self.tabla[posicion][x].pop()
                                     buscar = False
                             
@@ -149,23 +160,19 @@ class  HashTable:
                     print("No se consiguio el avion")
                     return None
             elif(not buscar):
-                print(x)
                 prev = x-1
-                print("prev {}".format(prev))
-                print(self.tabla[posicion][prev])
                 for y in range(2):
                     if (len(self.tabla[posicion][x]) == 1):
                         self.tabla[posicion][prev].append(self.tabla[posicion][x][y])
                         self.tabla[posicion].pop(x)
-                        print("queda lista vacia")
                         break
                     elif (y == 0):
                         self.tabla[posicion][prev].append(self.tabla[posicion][x][y])
                         self.tabla[posicion][x].pop(0)
                         break
 
-            if (x == len(self.tabla[posicion])-1):
-                print(self.tabla[posicion])
+            if (x == largo-1):
+                print(self.print_tabla(self.tabla[posicion]))
 
                     
                 
@@ -204,28 +211,31 @@ class  HashTable:
             self.num_elementos -=1 """
 
     def binary_search(self, arr, low, high, x, string):#pasar el indice, un 0, el len(tabla) -1 y el valor a buscar
-        if high >= low:
+        try:
+            if high >= low:
 
-            mid = (high + low) // 2
-    
-            # If element is present at the middle itself
-            if self.ascii_nombre(arr[mid][0]) == x:
-                if (arr[mid][0] == string):
-                    return arr[mid]
+                mid = (high + low) // 2
+        
+                # If element is present at the middle itself
+                if self.ascii_nombre(arr[mid][0]) == x:
+                    if (arr[mid][0] == string):
+                        return arr[mid]
+                    else:
+                        return self.binary_search(arr, low, mid, x, string) #puede ser mid -1
+        
+                # If element is smaller than mid, then it can only
+                # be present in left subarray
+                elif self.ascii_nombre(arr[mid][0]) > x:
+                    return self.binary_search(arr, low, mid - 1, x, string)
+        
+                # Else the element can only be present in right subarray
                 else:
-                    return self.binary_search(arr, low, mid, x, string) #puede ser mid -1
-    
-            # If element is smaller than mid, then it can only
-            # be present in left subarray
-            elif self.ascii_nombre(arr[mid][0]) > x:
-                return self.binary_search(arr, low, mid - 1, x, string)
-    
-            # Else the element can only be present in right subarray
+                    return self.binary_search(arr, mid + 1, high, x, string)
+        
             else:
-                return self.binary_search(arr, mid + 1, high, x, string)
-    
-        else:
-            # Element is not present in the array
+                # Element is not present in the array
+                return -1
+        except:
             return -1
     
     def listar_piloto(self, serial, piloto):

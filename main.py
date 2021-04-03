@@ -139,11 +139,23 @@ def llenar_lista(hash_table):
 #def buscar_avion_serial(serial):
 
 
-#def buscar_avion_modelo(modelo):
+def buscar_avion_modelo(modelo):
+    with open("Basedatos.txt", "r") as bd:
+        datos = bd.readlines()
+    for x in datos:
+        y = x[:-1].split(",")
+        modelo = y[1]
+        modelo = modelo[1:]
+        hash_table.buscar_modelo(modelo)
 
-
-#def buscar_avion_nombre(nombre):
-
+def buscar_avion_nombre(nombre):
+    with open("Basedatos.txt", "r") as bd:
+        datos = bd.readlines()
+    for x in datos:
+        y = x[:-1].split(",")
+        nombre = y[2]
+        nombre = nombre[1:]
+        hash_table.buscar_nombre(nombre)
 
 #def asignar_piloto():
 

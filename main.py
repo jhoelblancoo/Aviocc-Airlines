@@ -31,7 +31,7 @@ def ingresar_avion(seriales, nombres, modelos):
     serial = input("Ingrese el serial del avion: ")#el usuario ingresa el serial del avion
     validacion_serial = bool(serial != None) and bool(serial not in seriales) #el username no se encontro en la base de datos
     while (validacion_serial == False or len(serial) != 9 or " " in serial): #Validacion para username
-        print("{}Su usuario solo puede contener minusculas y numeros sin ningun espacio{}\n".format(Fore.LIGHTRED_EX, Fore.RESET))
+        print("{}Este serial es posible que ya este registrado, y recuerde que solo puede contener minusculas y numeros sin ningun espacio{}\n".format(Fore.LIGHTRED_EX, Fore.RESET))
         serial = input("Ingerese el serial nuevamente: ")
         validacion_serial = serial != None and serial not in seriales
     serial = serial.title()
@@ -246,7 +246,7 @@ def buscar_avion_modelo(hash, boolean):
 
     avioncito = hash.buscar_serial(avion[1])
     if (avioncito and not boolean):
-        print("El avion de modleo {} es el siguiente:".format(modelo))
+        print("El avion de modelo {} es el siguiente:".format(modelo))
         print(avioncito.encontrado_modelo())
     elif (avioncito == None):
         print("No existe ningun avion con el modelo {}".format(modelo))
@@ -319,7 +319,6 @@ def main():
         if elegir == 1:
             print("\nInsertar avion")
             seriales = lista_seriales(lista.indice_modelo)
-            print(seriales)
             modelos = lista_modelos(lista.indice_modelo)
             nombres = lista_nombres(lista.indice_nombre)
             avion = ingresar_avion(seriales, nombres, modelos)

@@ -37,6 +37,7 @@ class  HashTable:
             self.tabla[posicion][2] = array
          """
         for x in range(6):
+            #Abuelo 1, Padre 3, Hijos 6
             if (len(self.tabla[posicion]) == x):
                 array = []
                 self.tabla[posicion].append(array)
@@ -155,7 +156,7 @@ class  HashTable:
                 if (arr[mid][0] == string):
                     return arr[mid]
                 else:
-                    return self.binary_search(arr, low, mid - 1, x, string)
+                    return self.binary_search(arr, low, mid, x, string) #puede ser mid -1
     
             # If element is smaller than mid, then it can only
             # be present in left subarray

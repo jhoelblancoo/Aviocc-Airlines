@@ -212,6 +212,15 @@ def editar_txt(serial, avion, piloto):
     with open("Basedatos.txt", "a+") as bd: 
         bd.write(nuevo_avion.para_txt() + "\n")
 
+def eliminar_avion_txt(serial, avion):
+    with open("BaseDatos.txt", "r") as f:
+        lines = f.readlines()
+    with open("BaseDatos.txt", "w") as f:
+        for line in lines:
+            y = line[:-1].split(",")
+            if y[0] != serial:
+                f.write(line)
+
 
 def buscar_avion_serial(hash, boolean):
     serial = input("Ingrese el serial del avion: ")#el usuario ingresa el serial del avion
@@ -518,6 +527,7 @@ def main():
                 print("No se consiguio el avion")
             else:
                 lista.eliminar_serial(avion.serial)
+                eliminar_avion_txt(avion.serial, avion)
 
 
             print("\n{}1) Volver al menu \n{}2) Salir {}".format(Fore.LIGHTBLUE_EX, Fore.LIGHTRED_EX, Fore.RESET))

@@ -36,7 +36,7 @@ class  HashTable:
             array = [avion]
             self.tabla[posicion][2] = array
          """
-        for x in range(6):
+        for x in range(8):
             #Abuelo 1, Padre 3, Hijos 6
             if (len(self.tabla[posicion]) == x):
                 array = []
@@ -62,7 +62,7 @@ class  HashTable:
                 if (self.tabla[posicion][x][y] == None):
                     self.tabla[posicion][x][y] = avion
                     return"""
-            if (x == 5):
+            if (x == 7):
                 print("Ya no hay espacio para añadir este avion")
             
         #self.tabla[posicion].append(avion)
@@ -111,6 +111,63 @@ class  HashTable:
             except:
                 print("No se consiguio el avion")
                 return None
+                
+    def eliminar_serial(self, serial):
+        posicion = 0
+        posicion = self.direccion(serial)
+        buscar = True
+        print(self.tabla[posicion])
+        #valor = None
+        for x in range(len(self.tabla[posicion])):
+            if (buscar):
+                try:
+                    for y in range(2):
+                        try:
+                            if (y == 0):
+                                if (self.tabla[posicion][x][y].serial == serial):
+                                    print("Se elimino al primer avion con exito ")
+                                    print(self.tabla[posicion][x][y])
+                                    self.tabla[posicion][x].pop(0)
+                                    if (len(self.tabla[posicion][x]) == 0): 
+                                        self.tabla[posicion].pop(x)
+                                        print("la lista quedo vacia")
+                                        print(self.tabla[posicion])
+                                    buscar = False
+                                    print("arriba {}".format(x))
+                                    break
+                            else:
+                                if (buscar and self.tabla[posicion][x][y].serial == serial):
+                                    print("Se elimino al segundo avion con exito ")
+                                    print(self.tabla[posicion][x][y])
+                                    self.tabla[posicion][x].pop()
+                                    buscar = False
+                            
+                        except:
+                            print("No se consiguio el avion")
+                            return None
+                except:
+                    print("No se consiguio el avion")
+                    return None
+            elif(not buscar):
+                print(x)
+                prev = x-1
+                print("prev {}".format(prev))
+                print(self.tabla[posicion][prev])
+                for y in range(2):
+                    if (len(self.tabla[posicion][x]) == 1):
+                        self.tabla[posicion][prev].append(self.tabla[posicion][x][y])
+                        self.tabla[posicion].pop(x)
+                        print("queda lista vacia")
+                        break
+                    elif (y == 0):
+                        self.tabla[posicion][prev].append(self.tabla[posicion][x][y])
+                        self.tabla[posicion][x].pop(0)
+                        break
+
+            if (x == len(self.tabla[posicion])-1):
+                print(self.tabla[posicion])
+
+                    
                 
     def print_indice_nombre(self):
         for x in self.indice_nombre:

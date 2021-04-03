@@ -224,7 +224,7 @@ def buscar_avion_serial(hash, boolean):
     avioncito = hash.buscar_serial(serial)
     if (avioncito and not boolean):
         print("El avion de serial {} es el siguiente:".format(serial))
-        print(avioncito.encontrado_serial)
+        print(avioncito.encontrado_serial())
     elif (avioncito == None):
         print("No existe ningun avion con el serial {}".format(serial))
     return avioncito
@@ -478,7 +478,36 @@ def main():
             else: continuar_trabajo = False
         
         elif elegir == 5:
-            print("\nEliminar avion")
+            print("""
+    Menu        
+1) Busqueda por serial
+2) Busqueda por nombre
+3) Busqueda por modelo
+""")
+            while True:
+                try:
+                    opcion = int(input("{}Ingrese su opcion:{} ".format(Fore.LIGHTYELLOW_EX, Fore.RESET)))
+                    if opcion < 1 or opcion > 3:
+                        raise  ValueError
+                    break
+                except ValueError:
+                    print("{}La opcion ingresada no es valida{}".format(Fore.LIGHTRED_EX, Fore.RESET))
+            avion = ""
+            if (opcion == 1):
+                avion = buscar_avion_serial(lista, True)
+            
+            elif (opcion == 2):
+                avion = buscar_avion_nombre(lista, True)
+
+            elif (opcion == 3):
+                avion = buscar_avion_modelo(lista, True)
+            
+            if (avion == None or avion == "" or avion == " "):
+                print("No se consiguio el avion")
+            else:
+                lista.eliminar_serial(avion.serial)
+
+
             print("\n{}1) Volver al menu \n{}2) Salir {}".format(Fore.LIGHTBLUE_EX, Fore.LIGHTRED_EX, Fore.RESET))
             while True: 
                 try:
@@ -491,7 +520,7 @@ def main():
             if seguir == 1:
                 continuar_trabajo = True
             else: continuar_trabajo = False
-
+        
         elif elegir == 6:
             continuar_trabajo = False
 

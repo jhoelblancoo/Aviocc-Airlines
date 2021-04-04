@@ -1,20 +1,25 @@
 B31651030, Boeing 737, El Pitufo, Juan Perez
 B31651031, Boeing 727, El Bromas, Checo Perez
-B31651032, Boeing 757, El Crack, Jose Perez
-B31651033, Boeing 767, El Chavo, Pedro Perez
-B31651034, Boeing 777, El Perro, Luis Perez
-B31651035, Boeing 787, El Bromas, Angel Perez
-B31651036, Boeing 787, El Bromas, Angel Perez
-B31651037, Boeing 787, El Bromas, Angel Perez
-B31651038, Boeing 787, El Bromas, Angel Perez
-B31651039, Boeing 787, El Bromas, Angel Perez
-B31651040, Boeing 787, El Bromas, Angel Perez
-B31651041, Boeing 787, El Loquero, Eduardo Fernandez
-B31651042, Boeing 787, El Bromas, Angel Perez
-B31651043, Boeing 787, El Bromas, Angel Perez
-B31651043, Boeing 787, El Peo, Carlos Feo
-B31651049, Boeing 797, El Chavo, 
-B31651008, Airbus A319, El Crack, 
-B31651048, Airbus A321, El Bromas, 
-B31651090, Airbus A330, El Crack, Juan Lopez
-B31651088, Airbus A320, El Crack, Pedro Leon
+B31651032, Boeing 747, El Crack, Jose Perez
+B31651033, Boeing 757, El Chavo, Pedro Perez
+B31651034, Boeing 767, El Perro, 
+R31651035, Boeing 777, La Encava, 
+R31651036, Boeing 787, El Bicho, Maria Lopez
+B31651038, Boeing 717, Panchito, Angel Perez
+B31651039, Boeing 707, El Rapido, Angel Guzman
+B31651048, Airbus A321, El Lento, 
+B31651090, Airbus A330, Messi, Juan Lopez
+Q31623658, Airbus A320, El Loco, 
+Q31651923, Airbus A320 Neo, El Feo, 
+Y31651356, Airbus A340, El Chamo, Pedro Leon
+Y31665873, Airbus A360, El Hacha, 
+F31659572, Airbus A370, Mad Max, 
+B55224860, Airbus A390, El Chamba, 
+B31650000, Md-80, La GuaGua, Carla Pietro
+T67651055, Embraer 170, Betulio, 
+D31699068, Cessna Citation X, El Paco, 
+B31651008, Airbus A319, La Presion, Javier Rios
+Y31674593, Airbus A350, Pepito, 
+R31651037, Boeing 797, Juanito, 
+F45672456, Airbus A380, Bebecita, Carlos fresco
+B31650009, Tupolev Tu-204, El Ruso, 

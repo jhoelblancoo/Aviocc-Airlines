@@ -15,13 +15,28 @@ class Avion:
         return "{}, {}, {}, {}".format(self.serial, self.modelo, self.nombre, self.piloto)
     
     def encontrado_serial(self):
-        return "Modelo: {}\nNombre: {}\nPiloto: {}".format(self.modelo, self.nombre, self.piloto)
+        piloto = ""
+        if (self.piloto == "" or self.piloto == " " or self.piloto == None):
+            piloto = "No tiene piloto asignado"
+        else:
+            piloto = self.piloto
+        return "Modelo: {}\nNombre: {}\nPiloto: {}".format(self.modelo, self.nombre, piloto)
         
     def encontrado_nombre(self):
-        return "Serial: {}\nModelo: {}\nPiloto: {}".format(self.serial, self.modelo, self.piloto)
+        piloto = ""
+        if (self.piloto == "" or self.piloto == " " or self.piloto == None):
+            piloto = "No tiene piloto asignado"
+        else:
+            piloto = self.piloto
+        return "Serial: {}\nModelo: {}\nPiloto: {}".format(self.serial, self.modelo, piloto)
 
     def encontrado_modelo(self):
-        return "Serial: {}\nNombre: {}\nPiloto: {}".format(self.serial, self.nombre, self.piloto)
+        piloto = ""
+        if (self.piloto == "" or self.piloto == " " or self.piloto == None):
+            piloto = "No tiene piloto asignado"
+        else:
+            piloto = self.piloto
+        return "Serial: {}\nNombre: {}\nPiloto: {}".format(self.serial, self.nombre, piloto)
 
     def ascii_nombre(self):
         valor = 0

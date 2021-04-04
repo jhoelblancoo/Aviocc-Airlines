@@ -106,10 +106,8 @@ class  HashTable:
                             return self.tabla[posicion][x][y]
                         
                     except:
-                        print("No se consiguio el avion")
                         return None
             except:
-                print("No se consiguio el avion")
                 return None
 
     def print_tabla(self, tabla):
@@ -121,14 +119,13 @@ class  HashTable:
                     print("[ {} ]".format(tabla[x][0].get_serial()))
                     
             except:
-                print("No se consiguio el avion")
                 return None
                 
     def eliminar_serial(self, serial):
         posicion = 0
         posicion = self.direccion(serial)
         buscar = True
-        print(self.print_tabla(self.tabla[posicion]))
+        #Con este print se comprueba como se elimina el avion print(self.print_tabla(self.tabla[posicion]))
         #valor = None
         largo = len(self.tabla[posicion])
         for x in range(len(self.tabla[posicion])):
@@ -143,7 +140,7 @@ class  HashTable:
                                     self.tabla[posicion][x].pop(0)
                                     if (len(self.tabla[posicion][x]) == 0): 
                                         self.tabla[posicion].pop(x)
-                                        print(self.print_tabla(self.tabla[posicion]))
+                                        #Con este print se comprueba como se elimina el avion print(self.print_tabla(self.tabla[posicion]))
                                     buscar = False
                                     break
                             else:
@@ -154,10 +151,8 @@ class  HashTable:
                                     buscar = False
                             
                         except:
-                            print("No se consiguio el avion")
                             return None
                 except:
-                    print("No se consiguio el avion")
                     return None
             elif(not buscar):
                 prev = x-1
@@ -172,7 +167,8 @@ class  HashTable:
                         break
 
             if (x == largo-1):
-                print(self.print_tabla(self.tabla[posicion]))
+                print("")
+                #Con este print se comprueba como se elimina el avion print(self.print_tabla(self.tabla[posicion]))
 
                     
                 
@@ -199,10 +195,8 @@ class  HashTable:
                             return self.tabla[posicion][x][y]
                         
                     except:
-                        print("No se consiguio el avion")
                         return 
             except:
-                print("No se consiguio el avion")
                 return 
 
         """ posicion = self.direccion(serial)
@@ -210,30 +204,30 @@ class  HashTable:
             self.tabla[posicion] = None
             self.num_elementos -=1 """
 
-    def binary_search(self, arr, low, high, x, string):#pasar el indice, un 0, el len(tabla) -1 y el valor a buscar
+    def binary_search(self, lista, low, high, ascii_clave, string_clave):#pasar el indice, un 0, el len(tabla) -1 y el valor a buscar
         try:
             if high >= low:
 
                 mid = (high + low) // 2
         
-                # If element is present at the middle itself
-                if self.ascii_nombre(arr[mid][0]) == x:
-                    if (arr[mid][0] == string):
-                        return arr[mid]
+                #Si el elemento que se busca esta en la mitad de la lista
+                if self.ascii_nombre(lista[mid][0]) == ascii_clave:
+                    if (lista[mid][0] == string_clave):
+                        return lista[mid]
                     else:
-                        return self.binary_search(arr, low, mid, x, string) #puede ser mid -1
+                        return self.binary_search(lista, low, mid, ascii_clave, string_clave) #puede ser mid -1
         
-                # If element is smaller than mid, then it can only
-                # be present in left subarray
-                elif self.ascii_nombre(arr[mid][0]) > x:
-                    return self.binary_search(arr, low, mid - 1, x, string)
+                # Si el elemento es menor que el mid
+                #estara presenta en el lado izquierdo de la lista
+                elif self.ascii_nombre(lista[mid][0]) > ascii_clave:
+                    return self.binary_search(lista, low, mid - 1, ascii_clave, string_clave)
         
-                # Else the element can only be present in right subarray
+                #Entonces el elemento estara presente en el lado derecho de la lista
                 else:
-                    return self.binary_search(arr, mid + 1, high, x, string)
+                    return self.binary_search(lista, mid + 1, high, ascii_clave, string_clave)
         
             else:
-                # Element is not present in the array
+                # El elemento no esta en el array
                 return -1
         except:
             return -1
@@ -256,10 +250,8 @@ class  HashTable:
                                 return False
                         
                     except:
-                        print("No se consiguio el avion")
                         return False
             except:
-                print("No se consiguio el avion")
                 return False
 
     def quitar_piloto(self, serial):
@@ -281,10 +273,8 @@ class  HashTable:
                                 return False
                         
                     except:
-                        print("No se consiguio el avion")
                         return False
             except:
-                print("No se consiguio el avion")
                 return False
         
 

@@ -29,11 +29,11 @@ def ingresar_avion(seriales, nombres, modelos):
     Aqui el usuario va a ingresar los datos del avion
     """
     serial = input("Ingrese el serial del avion: ")#el usuario ingresa el serial del avion
-    validacion_serial = bool(serial != None) and bool(serial not in seriales) #el username no se encontro en la base de datos
+    validacion_serial = bool(serial != None) and bool(serial not in seriales) and (serial[1:].isdecimal())#el username no se encontro en la base de datos
     while (validacion_serial == False or len(serial) != 9 or " " in serial): #Validacion para username
-        print("{}Este serial es posible que ya este registrado, y recuerde que solo puede contener minusculas y numeros sin ningun espacio{}\n".format(Fore.LIGHTRED_EX, Fore.RESET))
+        print("{}Este serial es posible que ya este registrado, y recuerde que solo puede contener una letra y numeros sin ningun espacio{}\n".format(Fore.LIGHTRED_EX, Fore.RESET))
         serial = input("Ingerese el serial nuevamente: ")
-        validacion_serial = serial != None and serial not in seriales
+        validacion_serial =  bool(serial != None) and bool(serial not in seriales) and (serial[1:].isdecimal())
     serial = serial.title()
 
     modelo = input("Ingrese el modelo del avion: ") #el usuario ingresa su nombre
@@ -66,77 +66,9 @@ def ingresar_avion(seriales, nombres, modelos):
     with open("Basedatos.txt", "a+") as bd: 
         bd.write(nuevo_avion.para_txt() + "\n") #se agrega el usuario a la base de datos
     
+    print("El avion ha sido añadido a la base de datos")
     return nuevo_avion
 
-def datos_usuario():
-    """
-    Aqui el usuario va a ingresar los datos del avion
-    """
-    serial = input("Ingrese el serial del avion: ")#el usuario ingresa el serial del avion
-    aviones = []
-    serial_repetido = True
-    while serial_repetido: #se verifica si el serial ya existe
-        with open("BaseDatos.txt", "r") as bd:
-            datos = bd.readlines()
-        for x in datos:
-            avion = x[:-1].split(',') #si el username esta en la base de datos no necesita ingresar sus datos
-            aviones.append(avion[0])
-            #se procede a extraer los datos del username guardado y copiarlos 
-            if serial in aviones:
-                print("Un avion con este serial ya existe en la base de datos\n")
-                """sleep(2)
-                serial = avion[0]
-                modelo = avion[1].split(" ")
-                modelo = modelo[1].title()
-                nombre = avion[2].split(" ")
-                piloto = avion[3].split(" ")
-                with open("Basedatos.txt", "r") as db: 
-                    lineas = db.readlines()
-                with open("Basedatos.txt", "w") as db: #se reescribe la lista en la base de datos sin el usuario actual  
-                    for linea in lineas:
-                        if serial not in linea:
-                            db.write(linea) 
-                with open("Basedatos.txt", "a") as bd: #se agrega a la base de datos el usuario actual que ya ha jugado antes, se mantienen todos sus datos pasados
-                    bd.write("{}, {}, {}, {}, {}, {}\n".format(username, nombre, edad, genero, puntaje, disparos_efectuados))
-                return Usuario(username, nombre, edad, genero, puntaje, disparos_efectuados)
-                username_repetido = False"""
-        else:
-            validacion_serial = serial #el username no se encontro en la base de datos
-            while validacion_serial == False or len(serial) > 9 or " " in serial: #Validacion para username
-                print("{}Su usuario solo puede contener minusculas y numeros sin ningun espacio{}\n".format(Fore.LIGHTRED_EX, Fore.RESET))
-                serial = input("Ingerese el serial nuevamente: ")
-                validacion_serial = serial != None
-            serial = serial.title()
-
-            modelo = input("Ingrese el modelo del avion: ") #el usuario ingresa su nombre
-            validacion_modelo = bool(modelo != None) #se valida que el nombre este correcto
-            while validacion_modelo == False:
-                print("{}Este modleo no es valido{}".format(Fore.LIGHTRED_EX, Fore.RESET))
-                nombre = input("Ingrese el modelo del avion: ")
-                validacion_modelo = bool(modelo != None)
-            modelo = modelo.title() 
-
-            nombre = input("Ingrese el nombre del avion: ") #el usuario ingresa su nombre
-            validacion_nombre = bool(re.fullmatch('[A-Za-z]{2,25}( [A-Za-z]{2,25})+?', nombre)) #se valida que el nombre este correcto
-            while validacion_nombre == False:
-                print("{}Este nombre no es valido{}".format(Fore.LIGHTRED_EX, Fore.RESET))
-                nombre = input("Ingrese el nombre del avion: ")
-                validacion_nombre = bool(re.fullmatch('[A-Za-z]{2,25}( [A-Za-z]{2,25})+?', nombre))
-            nombre = nombre.title() 
-
-            piloto = input("Ingrese el nombre del piloto: ") #el usuario ingresa su nombre
-            validacion_piloto = bool(re.fullmatch('[A-Za-z]{2,25}( [A-Za-z]{2,25})+?', piloto)) #se valida que el nombre este correcto
-            while validacion_piloto == False:
-                print("{}Este nombre no es valido{}".format(Fore.LIGHTRED_EX, Fore.RESET))
-                nombre = input("Ingrese el nombre del piloto: ")
-                validacion_piloto = bool(re.fullmatch('[A-Za-z]{2,25}( [A-Za-z]{2,25})+?', piloto))
-            piloto = piloto.title() 
-
-            nuevo_avion = Avion(serial, modelo, nombre, piloto)
-            with open("Basedatos.txt", "a+") as bd: 
-                bd.write(nuevo_avion.para_txt() + "\n") #se agrega el usuario a la base de datos
-            serial_repetido = False
-            return nuevo_avion
 
 def lista_seriales(lista):
     lista_seriales = []
@@ -226,17 +158,19 @@ def buscar_avion_serial(hash, boolean):
     serial = input("Ingrese el serial del avion: ")#el usuario ingresa el serial del avion
     validacion_serial = bool(serial != None)  #el serial no se encontro en la base de datos
     while (validacion_serial == False or len(serial) != 9 or " " in serial): #Validacion para serial
-        print("{}El serial solo puede tener letras, numeros sin ningun espacio y 9 caracteres{}\n".format(Fore.LIGHTRED_EX, Fore.RESET))
+        print("{}El serial solo puede tener una letra y numeros sin ningun espacio y 9 caracteres{}\n".format(Fore.LIGHTRED_EX, Fore.RESET))
         serial = input("Ingerese el serial nuevamente: ")
         validacion_serial = bool(serial != None) 
     serial = serial.title()
     avioncito = hash.buscar_serial(serial)
+    print("\n")
     try:
         if (avioncito and not boolean):
             print("El avion de serial {} es el siguiente:".format(serial))
             print(avioncito.encontrado_serial())
         elif (avioncito == None):
             print("No existe ningun avion con el serial {}".format(serial))
+            return
         return avioncito
     except:
         print("No existe ningun avion con el serial {}".format(serial))
@@ -254,9 +188,11 @@ def buscar_avion_modelo(hash, boolean):
     hash.ordenar_indice_modelo()
     int_modelo = hash.ascii_nombre(modelo)
     avion = hash.binary_search(hash.indice_modelo, 0, len(hash.indice_modelo) -1, int_modelo, modelo)
+    print("\n")
     try:
         if (avion == -1):
             print("El avion por modelo {} no existe en la base de datos".format(modelo))
+            return
 
         avioncito = hash.buscar_serial(avion[1])
         if (avioncito and not boolean):
@@ -264,6 +200,7 @@ def buscar_avion_modelo(hash, boolean):
             print(avioncito.encontrado_modelo())
         elif (avioncito == None):
             print("No existe ningun avion con el modelo {}".format(modelo))
+            return
         return avioncito
     except:
         print("No existe ningun avion con el modelo {}".format(modelo))
@@ -283,9 +220,11 @@ def buscar_avion_nombre(hash, boolean):
     hash.ordenar_indice_nombre()
     int_nombre = hash.ascii_nombre(nombre)
     avion = hash.binary_search(hash.indice_nombre, 0, len(hash.indice_nombre) -1, int_nombre, nombre)
+    print("\n")
     try: 
         if (avion == -1):
-            print("El avion por modelo {} no existe en la base de datos".format(nombre))
+            print("El avion de nombre {} no existe en la base de datos".format(nombre))
+            return
 
         avioncito = hash.buscar_serial(avion[1])
         if (avioncito and not boolean):
@@ -293,6 +232,7 @@ def buscar_avion_nombre(hash, boolean):
             print(avioncito.encontrado_nombre())
         elif (avioncito == None):
             print("No existe ningun avion con el nombre {}".format(nombre))
+            return
         return avioncito
     except:
         print("No existe ningun avion con el nombre {}".format(nombre))
@@ -422,7 +362,7 @@ def main():
                 avion = buscar_avion_modelo(lista, True)
             
             if (avion == None or avion == "" or avion == " "):
-                print("No se consiguio el avion")
+                print("\n")
             else:
                 pilotos = lista_pilotos()
                 piloto = input("Ingrese el nombre del piloto: ") #el usuario ingresa su nombre
@@ -477,7 +417,7 @@ def main():
                 avion = buscar_avion_modelo(lista, True)
             
             if (avion == None or avion == "" or avion == " "):
-                print("No se consiguio el avion")
+                print("\n")
             else:
                 boolean = lista.quitar_piloto(avion.serial)
                 if (boolean):
@@ -524,7 +464,7 @@ def main():
                 avion = buscar_avion_modelo(lista, True)
             
             if (avion == None or avion == "" or avion == " "):
-                print("No se consiguio el avion")
+                print("\n")
             else:
                 lista.eliminar_serial(avion.serial)
                 eliminar_avion_txt(avion.serial, avion)

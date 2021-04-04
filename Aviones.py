@@ -10,13 +10,23 @@ class Avion:
 
     def get_serial(self):
         return self.serial
-
-    def get_modelo(self):
-        return self.modelo
-
-    def get_nombre(self):
-        return self.nombre
     
     def para_txt(self):
         return "{}, {}, {}, {}".format(self.serial, self.modelo, self.nombre, self.piloto)
+    
+    def encontrado_serial(self):
+        return "Modelo: {}\nNombre: {}\nPiloto: {}".format(self.modelo, self.nombre, self.piloto)
+        
+    def encontrado_nombre(self):
+        return "Serial: {}\nModelo: {}\nPiloto: {}".format(self.serial, self.modelo, self.piloto)
+
+    def encontrado_modelo(self):
+        return "Serial: {}\nNombre: {}\nPiloto: {}".format(self.serial, self.nombre, self.piloto)
+
+    def ascii_nombre(self):
+        valor = 0
+        nombre = self.nombre
+        for x in nombre:
+            valor += ord(x)
+        return valor
     
